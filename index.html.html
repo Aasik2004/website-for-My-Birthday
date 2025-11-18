@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>An Unforgettable Birthday Wish!</title>
+    <!-- Load Tailwind CSS for utility classes --><script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for the stunning visual effects */
+        
+        :root {
+            --primary-color: #ff3377; /* Hot Pink */
+            --secondary-color: #ffd700; /* Gold/Yellow */
+            --tertiary-color: #00ffff; /* Aqua Cyan */
+            --text-glow-main: #e0f2f7; /* Soft Blue-White for general glow */
+            --dark-bg: #0d0d26; /* Deep Cosmic Blue */
+
+            /* New colors for flowers and balloons */
+            --flower-color-1: #FF69B4; /* Deep Pink */
+            --flower-color-2: #FFD700; /* Gold */
+            --balloon-color-1: #FF4500; /* OrangeRed */
+            --balloon-color-2: #8A2BE2; /* BlueViolet */
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            background-image: url('https://images.unsplash.com/photo-1534796636681-3e0e713600f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG9to-wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            perspective: 1500px; 
+            position: relative;
+        }
+        
+        /* Dark overlay for contrast and cinematic filter */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4); 
+            backdrop-filter: blur(1.5px); 
+            z-index: -1;
+        }
+
+        /* Animated Star/Particle Background */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            overflow: hidden;
+            z-index: -2; 
+        }
+
+        .star {
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 5s infinite ease-in-out;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* 2. Main Container for Centering */
+        #container {
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.5) translateY(100px) rotateX(25deg);
+            transition: all 2s cubic-bezier(0.23, 1, 0.32, 1); 
+            max-width: 90vw;
+            padding: 3rem 2rem;
+            border-radius: 1.5rem;
+            background: rgba(13, 13, 38, 0.3); 
+            box-shadow: 0 0 80px rgba(0, 255, 255, 0.4); 
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        #container.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0) rotateX(0deg);
+        }
+
+        /* 3. Pre-Reveal Button Styling */
+        #open-button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            padding: 1.5rem 4rem;
+            font-size: 2rem;
+            font-weight: 900;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            box-shadow: 0 0 50px var(--primary-color), 0 0 20px var(--secondary-color), inset 0 0 10px rgba(255,255,255,0.5);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: float 3s infinite alternate, button-pulse 2s infinite alternate;
+        }
+
+        #open-button:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 60px var(--primary-color), 0 0 30px var(--secondary-color), inset 0 0 15px rgba(255,255,255,0.7);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-15px); }
+        }
+        @keyframes button-pulse {
+            0% { box-shadow: 0 0 50px var(--primary-color), 0 0 20px var(--secondary-color); }
+            100% { box-shadow: 0 0 70px var(--primary-color), 0 0 30px var(--secondary-color); }
+        }
+
+        /* 4. "Happy Birthday" text animation */
+        #happy-birthday-text {
+            color: var(--text-glow-main);
+            text-shadow: 0 0 10px var(--text-glow-main), 0 0 25px var(--tertiary-color), 0 0 45px var(--tertiary-color);
+            opacity: 0;
+            transform: translateY(-50px) scale(0.8);
+            animation: glowing-text-pulse 4s infinite alternate;
+        }
+        #happy-birthday-text.animate-in {
+            animation: text-reveal 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            animation-delay: 0.5s;
+        }
+        @keyframes text-reveal {
+            0% { opacity: 0; transform: translateY(-50px) scale(0.8); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes glowing-text-pulse {
+            0% { text-shadow: 0 0 10px var(--text-glow-main), 0 0 25px var(--tertiary-color), 0 0 45px var(--tertiary-color); }
+            50% { text-shadow: 0 0 15px var(--text-glow-main), 0 0 40px var(--secondary-color), 0 0 70px var(--secondary-color); }
+            100% { text-shadow: 0 0 10px var(--text-glow-main), 0 0 25px var(--tertiary-color), 0 0 45px var(--tertiary-color); }
+        }
+
+
+        /* 5. Letter Animation (Dynamic Name - more vibrant and bouncy) */
+        .name-text {
+            font-size: clamp(3.5rem, 12vw, 9rem); 
+            font-weight: 900;
+            color: white;
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            user-select: none;
+            min-height: 9rem; 
+            text-transform: uppercase;
+        }
+
+        .letter {
+            opacity: 0;
+            transform: translateY(60px) scale(0.1) rotateX(-180deg) rotateY(30deg);
+            display: inline-block;
+            transition: all 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            margin: 0 0.8vw;
+            text-shadow: 0 0 20px var(--primary-color), 0 0 50px var(--primary-color), 0 0 100px var(--primary-color), 0 0 150px rgba(255, 0, 0, 0.7);
+        }
+
+        .letter.animate {
+            opacity: 1;
+            transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg);
+        }
+
+        /* 6. Bottom Message Text Styling */
+        #bottom-message {
+            color: var(--text-glow-main);
+            text-shadow: 0 0 8px var(--text-glow-main), 0 0 20px var(--tertiary-color), 0 0 35px var(--tertiary-color);
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: glowing-text-pulse 4s infinite alternate; 
+        }
+        #bottom-message.animate-in {
+            animation: slide-up-reveal 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            animation-delay: 2.5s; 
+        }
+        @keyframes slide-up-reveal {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 7. Confetti/Particle Effect */
+        #confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 100;
+        }
+
+        .confetti {
+            position: absolute;
+            animation: fall 5s linear forwards;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.8)); 
+        }
+
+        .confetti:nth-child(5n+1) { background-color: var(--secondary-color); width: 14px; height: 4px; border-radius: 2px; }
+        .confetti:nth-child(5n+2) { background-color: var(--tertiary-color); width: 8px; height: 8px; border-radius: 50%; }
+        .confetti:nth-child(5n+3) { background-color: var(--primary-color); width: 10px; height: 10px; border-radius: 50%; }
+        .confetti:nth-child(5n+4) { background-color: #ffffff; width: 5px; height: 18px; border-radius: 1px; }
+        .confetti:nth-child(5n+5) { background-color: #f0f; /* Magenta */ width: 7px; height: 7px; border-radius: 50%; }
+
+        /* NEW: Flower & Balloon Styling and Animation */
+        .flower {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--flower-color-1);
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 0 0 10px var(--flower-color-1);
+            animation: float-up 10s linear forwards, rotate-flower 10s infinite linear;
+        }
+
+        .flower::before, .flower::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--flower-color-2);
+            border-radius: 50%;
+        }
+
+        .flower::before { transform: translateX(-50%); }
+        .flower::after { transform: translateX(50%); }
+
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            background: linear-gradient(to top, var(--balloon-color-1), var(--balloon-color-2));
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            opacity: 0;
+            box-shadow: 0 0 15px rgba(255,255,255,0.7), inset 0 0 8px rgba(255,255,255,0.5);
+            animation: float-up 12s linear forwards, sway 5s infinite alternate ease-in-out;
+        }
+        .balloon::after { /* Balloon string */
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            width: 2px;
+            height: 20px;
+            background-color: rgba(255,255,255,0.8);
+            transform: translateX(-50%);
+        }
+
+        @keyframes float-up {
+            0% { opacity: 0; transform: translateY(100vh) scale(0.8) rotateZ(0deg); }
+            20% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-20vh) scale(1.2) rotateZ(360deg); }
+        }
+
+        @keyframes rotate-flower {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes sway {
+            0% { transform: translateX(0px); }
+            100% { transform: translateX(20px); }
+        }
+
+
+        @keyframes fall {
+            0% { opacity: 1; transform: translate(0, -100px) rotateZ(0deg) rotateX(0deg); }
+            100% { opacity: 0; transform: translate(var(--x-end), 100vh) rotateZ(720deg) rotateX(180deg); }
+        }
+
+        /* Modal styling */
+        #modal-content {
+            background: linear-gradient(135deg, #1a1a4c, #331133); 
+            border: 2px solid var(--primary-color);
+            color: #e0f2f7;
+            box-shadow: 0 0 40px rgba(255, 51, 119, 0.6);
+            padding: 2.5rem;
+        }
+        #modal-content h2 { color: var(--secondary-color); text-shadow: 0 0 10px var(--secondary-color); }
+        #modal-content p { color: #ccc; }
+        #user-name-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: var(--tertiary-color);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+        #user-name-input::placeholder { color: rgba(255, 255, 255, 0.6); }
+        #user-name-input:focus { outline: none; ring-color: var(--primary-color); }
+        #submit-name-button {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+        #submit-name-button:hover {
+            box-shadow: 0 0 30px var(--primary-color), 0 0 10px var(--secondary-color);
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Animated Star Background Layer --><div class="stars" id="star-background"></div>
+
+    <!-- Container for all floating particles (confetti, flowers, balloons) --><div id="particle-container"></div>
+
+    <!-- Name Input Modal --><div id="name-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
+        <div class="p-8 rounded-xl shadow-2xl text-center max-w-sm w-full transform transition-all duration-300 scale-90 opacity-0" id="modal-content">
+            <h2 class="text-3xl font-extrabold mb-4">Who is the Star Today?</h2>
+            <p class="text-base mb-6">Enter the name to receive this special message:</p>
+            <input type="text" id="user-name-input" placeholder="Name"
+                   class="w-full p-4 mb-6 rounded-lg text-lg text-center font-semibold transition"
+                   maxlength="15" />
+            <button id="submit-name-button" 
+                    class="w-full text-white font-bold py-3 px-4 rounded-xl shadow-lg transition duration-300 transform hover:scale-[1.02] active:scale-100">
+                Start the Party!
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content Wrapper --><div id="wrapper" class="flex flex-col items-center justify-center p-4">
+
+        <!-- Initial Button State --><button id="open-button">
+            Click to Start the Celebration!
+        </button>
+
+        <!-- Main Celebration Content (hidden until name is entered) --><div id="container" class="hidden">
+            
+            <h1 id="happy-birthday-text" class="text-5xl sm:text-7xl font-extrabold mb-4">
+                Happy Birthday,
+            </h1>
+
+            <!-- Animated Name Section - Letters will be dynamically inserted here --><div id="name-display" class="name-text">
+            </div>
+
+            <p id="bottom-message" class="mt-8 text-lg sm:text-2xl font-bold max-w-lg mx-auto">
+                Wishing you a day filled with joy, laughter, and everything wonderful. Shine bright!
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const openButton = document.getElementById('open-button');
+            const container = document.getElementById('container');
+            const nameDisplay = document.getElementById('name-display');
+            const particleContainer = document.getElementById('particle-container'); // Consolidated container
+            const happyBirthdayText = document.getElementById('happy-birthday-text');
+            const bottomMessage = document.getElementById('bottom-message');
+            const starBackground = document.getElementById('star-background');
+            
+            // Modal Elements
+            const nameModal = document.getElementById('name-modal');
+            const modalContent = document.getElementById('modal-content');
+            const userNameInput = document.getElementById('user-name-input');
+            const submitNameButton = document.getElementById('submit-name-button');
+
+            /**
+             * Generates animated stars for the background.
+             */
+            function generateStars(count) {
+                for (let i = 0; i < count; i++) {
+                    const star = document.createElement('div');
+                    star.classList.add('star');
+                    const size = Math.random() * 3 + 1; 
+                    star.style.width = `${size}px`;
+                    star.style.height = `${size}px`;
+                    star.style.left = `${Math.random() * 100}vw`;
+                    star.style.top = `${Math.random() * 100}vh`;
+                    star.style.animationDelay = `${Math.random() * 5}s`;
+                    star.style.animationDuration = `${Math.random() * 5 + 3}s`; 
+                    starBackground.appendChild(star);
+                }
+            }
+            generateStars(150); 
+
+            /**
+             * Function to generate a burst of confetti.
+             */
+            function launchConfetti(count) {
+                for (let i = 0; i < count; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+
+                    const size = Math.random() * 10 + 5; 
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    confetti.style.left = `${Math.random() * 100}vw`;
+                    confetti.style.top = `${-20 - Math.random() * 10}vh`; 
+
+                    confetti.style.setProperty('--x-end', `${(Math.random() - 0.5) * 400}px`);
+
+                    confetti.style.animationDelay = `${Math.random() * 2}s`;
+                    confetti.style.animationDuration = `${Math.random() * 3 + 4}s`; 
+
+                    particleContainer.appendChild(confetti); // Append to main particle container
+
+                    confetti.addEventListener('animationend', () => confetti.remove());
+                }
+            }
+
+            /**
+             * Function to generate floating flowers.
+             */
+            function launchFlowers(count) {
+                for (let i = 0; i < count; i++) {
+                    const flower = document.createElement('div');
+                    flower.classList.add('flower');
+                    flower.style.left = `${Math.random() * 100}vw`;
+                    flower.style.animationDelay = `${Math.random() * 5}s`;
+                    flower.style.animationDuration = `${Math.random() * 8 + 8}s`; // 8-16 seconds float duration
+                    particleContainer.appendChild(flower);
+                    flower.addEventListener('animationend', () => flower.remove());
+                }
+            }
+
+            /**
+             * Function to generate floating balloons.
+             */
+            function launchBalloons(count) {
+                for (let i = 0; i < count; i++) {
+                    const balloon = document.createElement('div');
+                    balloon.classList.add('balloon');
+                    balloon.style.left = `${Math.random() * 100}vw`;
+                    balloon.style.animationDelay = `${Math.random() * 7}s`;
+                    balloon.style.animationDuration = `${Math.random() * 10 + 10}s`; // 10-20 seconds float duration
+                    particleContainer.appendChild(balloon);
+                    balloon.addEventListener('animationend', () => balloon.remove());
+                }
+            }
+
+
+            /**
+             * Generates the individual letter spans for the given name.
+             * @param {string} name The name to display.
+             * @returns {NodeListOf<Element>} The list of newly created letter elements.
+             */
+            function generateNameElements(name) {
+                nameDisplay.innerHTML = ''; 
+                const charArray = Array.from(name.toUpperCase());
+                
+                charArray.forEach((char, index) => {
+                    const displayChar = char === ' ' ? '\u00A0' : char; 
+                    
+                    const letterSpan = document.createElement('span');
+                    letterSpan.classList.add('letter');
+                    letterSpan.textContent = displayChar;
+                    letterSpan.style.transitionDelay = `${index * 0.12}s`; 
+                    nameDisplay.appendChild(letterSpan);
+                });
+
+                return nameDisplay.querySelectorAll('.letter');
+            }
+
+            /**
+             * The main function to start the celebration after receiving the name.
+             * @param {string} userName The name entered by the user.
+             */
+            function startCelebration(userName) {
+                // Hide the modal quickly
+                modalContent.classList.add('scale-90', 'opacity-0');
+                setTimeout(() => {
+                    nameModal.classList.add('hidden');
+                }, 300);
+                
+                // 1. Generate the name elements dynamically
+                const dynamicLetters = generateNameElements(userName);
+
+                // 2. Show main container
+                container.classList.remove('hidden');
+
+                // 3. Trigger the container fade-in and scale-up (The main show!)
+                setTimeout(() => {
+                    container.classList.add('visible');
+                }, 100);
+
+                // 4. Animate "Happy Birthday" text
+                setTimeout(() => {
+                    happyBirthdayText.classList.add('animate-in');
+                }, 800); 
+
+                // 5. Animate the name letters one by one
+                dynamicLetters.forEach((letter, index) => {
+                    setTimeout(() => {
+                        letter.classList.add('animate');
+                    }, index * 180 + 1500); 
+                });
+
+                // 6. Animate the bottom message
+                setTimeout(() => {
+                    bottomMessage.classList.add('animate-in');
+                }, dynamicLetters.length * 180 + 1800); 
+
+                // 7. Launch the confetti burst
+                setTimeout(() => {
+                    launchConfetti(200); 
+                }, 2000); 
+
+                // 8. Launch flowers and balloons after initial confetti burst
+                setTimeout(() => {
+                    launchFlowers(30); // A good amount of flowers
+                    launchBalloons(15); // A good amount of balloons
+                }, 2500); // Start slightly after confetti
+
+
+                // 9. Set up intervals for continuous, subtle confetti, flowers, and balloons
+                setInterval(() => {
+                    launchConfetti(8); 
+                }, 2500);
+                setInterval(() => {
+                    launchFlowers(3); // Continuous subtle flowers
+                }, 5000);
+                setInterval(() => {
+                    launchBalloons(2); // Continuous subtle balloons
+                }, 7000);
+            }
+
+            // --- Event Listeners ---
+
+            // 1. Initial button click: Shows the name input modal
+            openButton.addEventListener('click', () => {
+                openButton.classList.add('hidden'); 
+                nameModal.classList.remove('hidden'); 
+                
+                // Trigger modal fade-in/scale-up effect
+                setTimeout(() => {
+                    modalContent.classList.remove('scale-90', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                    userNameInput.focus(); 
+                }, 10);
+            });
+
+            // 2. Modal Submit Button click
+            submitNameButton.addEventListener('click', () => {
+                let userName = userNameInput.value.trim();
+                
+                // Sanitization and Fallback
+                userName = userName.replace(/[^a-zA-Z0-9\s]/g, '');
+
+                if (userName.length === 0) {
+                     userName = "Celebration Star"; 
+                } else if (userName.toLowerCase() === 'seefa') {
+                    userName = "SEEFA"; 
+                }
+
+                startCelebration(userName);
+            });
+
+            // 3. Allows pressing Enter key to submit the name
+            userNameInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); 
+                    submitNameButton.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
